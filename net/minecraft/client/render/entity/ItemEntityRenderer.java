@@ -51,21 +51,21 @@ extends EntityRenderer<ItemEntity> {
     }
 
     @Override
-    public void render(ItemEntity arg, float f, float g, MatrixStack arg2, VertexConsumerProvider arg3, int i) {
+    public void render(ItemEntity arg, float f, float tickDelta, MatrixStack arg2, VertexConsumerProvider arg3, int i) {
         arg2.push();
         ItemStack lv = arg.getStack();
         this.random.setSeed(ItemEntityRenderer.getSeed(lv));
         BakedModel lv2 = this.itemRenderer.getModel(lv, arg.getWorld(), null, arg.getId());
         boolean bl = lv2.hasDepth();
         float h = 0.25f;
-        float j = MathHelper.sin(((float)arg.getItemAge() + g) / 10.0f + arg.uniqueOffset) * 0.1f + 0.1f;
+        float j = MathHelper.sin(((float)arg.getItemAge() + tickDelta) / 10.0f + arg.uniqueOffset) * 0.1f + 0.1f;
         float k = lv2.getTransformation().getTransformation((ModelTransformationMode)ModelTransformationMode.GROUND).scale.y();
         arg2.translate(0.0f, j + 0.25f * k, 0.0f);
-        float l = arg.getRotation(g);
+        float l = arg.getRotation(tickDelta);
         arg2.multiply(RotationAxis.POSITIVE_Y.rotation(l));
         ItemEntityRenderer.renderStack(this.itemRenderer, arg2, arg3, i, lv, lv2, bl, this.random);
         arg2.pop();
-        super.render(arg, f, g, arg2, arg3, i);
+        super.render(arg, f, tickDelta, arg2, arg3, i);
     }
 
     public static int getSeed(ItemStack stack) {
