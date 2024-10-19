@@ -51,7 +51,7 @@ extends EntityRenderer<ItemEntity> {
     }
 
     @Override
-    public void render(ItemEntity arg, float yaw, float tickDelta, MatrixStack arg2, VertexConsumerProvider arg3, int i) {
+    public void render(ItemEntity arg, float yaw, float tickDelta, MatrixStack arg2, VertexConsumerProvider arg3, int light) {
         arg2.push();
         ItemStack lv = arg.getStack();
         this.random.setSeed(ItemEntityRenderer.getSeed(lv));
@@ -63,9 +63,9 @@ extends EntityRenderer<ItemEntity> {
         arg2.translate(0.0f, j + 0.25f * k, 0.0f);
         float l = arg.getRotation(tickDelta);
         arg2.multiply(RotationAxis.POSITIVE_Y.rotation(l));
-        ItemEntityRenderer.renderStack(this.itemRenderer, arg2, arg3, i, lv, lv2, bl, this.random);
+        ItemEntityRenderer.renderStack(this.itemRenderer, arg2, arg3, light, lv, lv2, bl, this.random);
         arg2.pop();
-        super.render(arg, yaw, tickDelta, arg2, arg3, i);
+        super.render(arg, yaw, tickDelta, arg2, arg3, light);
     }
 
     public static int getSeed(ItemStack stack) {
